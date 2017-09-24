@@ -33,6 +33,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.todos.count;
+    // Set number of rows to the number of items in the todo list array
 }
 
 
@@ -62,6 +63,13 @@
 - (void)didSaveNewTodo:(NSString *)todoText {
     [self.todos addObject:todoText];
     [self.tableVeiw reloadData];
+}
+
+-(void)tableView: (UITableView*) tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.todos removeObjectAtIndex:indexPath.row];
+        [self.tableVeiw reloadData];
+    }
 }
 
 
